@@ -1,0 +1,30 @@
+#!/bin/sh
+#PBS -lwalltime=48:00:00
+#PBS -lselect=1:ncpus=32:ompthreads=32:mem=4gb
+
+module load intel-suite
+export NETCDF_VERSION=3.6.3
+module load netcdf/$NETCDF_VERSION
+
+# Increase stack sizes 
+export OMP_NUM_THREADS=32
+export KMP_STACKSIZE=1g
+ulimit -s unlimited
+
+cd ${HOME}/WORK/q-gcm/src/
+
+# Copy data files to temp directory
+cp ./avges.nc ./input_params.dat ./lastday.nc ./outdata.dat ${TMPDIR}/
+cd ${TMPDIR}
+
+# Create directory to store results
+mkdir outdata
+
+# Execute
+time ${HOME}/WORK/q-gcm/src/q-gcm
+
+# Copy files back over 
+cp -r ${TMPDIR}/outdata/. /rds/general/user/rk2014/home/WORK/q-gcm/outdata/
+
+
+module purge
