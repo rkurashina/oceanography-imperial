@@ -15,7 +15,7 @@ Code is essentially identical to original except very small modificaitons have b
 * qsub submit.pbs
 
 # CABARET
-CABARET 3L QG double-gyre model. See [here]{https://doi.org/10.1016/j.ocemod.2009.06.009} for description of particular adection scheme used. It is especially good at conserving PV so allows for model to be run at a coarser resolutions.
+CABARET 3L QG double-gyre model. See [here]{https://www.sciencedirect.com/science/article/abs/pii/S1463500309001267} for description of particular adection scheme used. It is especially good at conserving PV so allows for model to be run at a coarser resolutions.
 
 **To compile:**
 * module load intel-suite 
@@ -28,7 +28,7 @@ Note for CABARET and Lagrangian codes, the more recent versions of netCDF (4.3.3
 * qsub cabaret.pbs
 
 # Lagrangian particles
-Advects Lagrangian particles around flow outputted by CABARET. See [here]{https://doi.org/10.1017/jfm.2021.384} for example of use.
+Advects Lagrangian particles around flow outputted by CABARET. See [here]{https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/abs/western-boundary-layer-nonlinear-control-of-the-oceanic-gyres/F204931DF6499D3CE94ECF6487FD820F} for example of use.
 
 **To compile:**
 * module load intel-suite 
