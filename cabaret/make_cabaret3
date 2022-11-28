@@ -1,0 +1,19 @@
+include standard_defs.mk
+
+QG3_SOURCE = $(HOME_DIR)/qg3netcdf_DG_1025.f
+QG3_EXE = $(BUILD_DIR)/qg3netcdf_DG_1025
+
+
+VPATH = build
+transport: subsystem3 $(QG3_EXE)
+
+subsystem3:
+	cd $(NETCDF_DIR) && $(MAKE)
+
+
+$(QG3_EXE): $(QG3_SOURCE) $(BUILD_DIR)/*.o
+	$(CC) $(QG3_SOURCE) $(BUILD_DIR)/*.o -o $(QG3_EXE) $(CFLAGS) $(INCLUDES) $(LIBS) $(LINKS)
+
+
+clean:
+	cd $(BUILD_DIR) && rm *.o *.mod

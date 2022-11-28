@@ -1,0 +1,57 @@
+# CABARET AND ADVECTION MODEL
+
+Contains two programs:
+
+* CABARET is a 3-layer 2D double-gyre, box ocean QG model
+* OFFLINE_TRANSPORT advects particles offline using the stream function outputted by CABARET
+
+Instructions are for use on the HPC-cluster
+
+## REQUIREMENTS
+
+* ifort
+* netCDF
+* fftw
+
+## HOW TO COMPILE
+
+standard_defs.mk contains the compiler options for use on the HPC cluster. Change as necessary
+if running on different machine.
+
+* CC is the fortran compiler
+* HOME_DIR is the directory in which the code is stored, change as necessary
+* CFLAGS lists the compiler flags
+* NETCDF_VERSION is the installed version of netcdf, use the recommended version on the HPC
+* LIBS lists the location of the fftw and netcdf libraries
+* LINKS lists the necessary libraries
+* INCLUDES lists the location of the include files
+
+* type module load intel-suite
+* type module load netcdf/(version no.)
+* To compile cabaret: make -f make_cabaret
+* To compile offline_transport: make -f make_advection
+
+## HOW TO RUN ON HPC
+
+* cabaret.pbs is the job script to run the cabaret model. Change the data file names as necessary, and also the save directories. type qsub cabaret.pbs
+* advection.pbs is the job script for the advection code. Same as above.
+
+## CODE STRUCTURE
+
+### CABARET
+
+* The main source file is CABARET/qg3netcdf_DG_1025.f
+* Edit parameters at the top of the source file.
+
+### ADVECTION
+
+* The main source file is TRANSPORT/offline_transport3layer.f
+* Edit INPUT/mod_advection_input.f to change parameters
+* Edit offline_transport3layer.f to change seeding locations
+
+### OTHER FOLDERS
+
+* NETCDF contains the subroutines for creating, reading and writing netcdf files
+* LAGR contains the methods used for the advection scheme, e.g. spatial interpolation and time integration
+* SOLVER contains the elliptic solver used for CABARET
+* VAR declares all variables for the main source codes.
