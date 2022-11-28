@@ -5,7 +5,7 @@ Repository containing files for Q-GCM model, original repository is [here](https
 Code is essentially identical to original except very small modificaitons have been made for use on Imperial College HPC server. 
 
 To compile:
-* module load inte-suite 
+* module load intel-suite 
 * module load netcdf/3.6.3
 * make 
 
